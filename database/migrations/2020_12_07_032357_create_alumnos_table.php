@@ -15,6 +15,7 @@ class CreateAlumnosTable extends Migration
     {
         Schema::create('alumnos', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
+            $table->softDeletes();
 
             $table->primary('user_id');
         });

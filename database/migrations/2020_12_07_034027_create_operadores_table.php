@@ -16,6 +16,7 @@ class CreateOperadoresTable extends Migration
         Schema::create('operadores', function (Blueprint $table) {
             $table->foreignId('user_id')->constrained();
             $table->boolean('es_admin')->default(false);
+            $table->softDeletes();
 
             $table->primary('user_id');
         });

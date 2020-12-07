@@ -25,8 +25,11 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apellido',
+        'nickname',
         'email',
         'password',
+        'es_estudiante',
     ];
 
     /**
@@ -48,6 +51,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'es_estudiante' => 'boolean',
     ];
 
     /**
@@ -58,4 +62,15 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+
+    public function alumno() 
+    {
+        return $this->hasOne('App\Models\Alumno');
+    }
+
+    public function operador()
+    {
+        return $this->hasOne('App\Models\Operador');
+    }
 }

@@ -1,20 +1,22 @@
 @extends('layouts.suabe')
 
+@section('titulo')
+Libros
+@endsection
+
 @section('contenido')
 
 <div class="page-header mb-3">
     <br>
     <h3> Lista de libros</h3>
-</div>
-@if(!\Auth::user()->es_estudiante)
     <div class="text-mutex text-right mb-2">
         <a href="{{ route('libro.create') }}" class="btn btn-primary"> Nuevo </a>
     </div>
-@endif
+</div>
 
 <div class="card bg-secondary">
 <div class="card-body">
-<table class="table table-sm table-striped">
+<table class="table table-responsive table-sm table-striped">
     <thead>
         <tr class="table-primary text-center">
             <th scope="col">ISBN</th>
@@ -25,7 +27,6 @@
             <th scope="col">Año</th>
             <th scope="col">Páginas</th>
             <th scope="col">Categoría</th>
-            <th scope="col"> </th>
             <th scope="col"> </th>
         </tr>
     </thead>
@@ -41,10 +42,21 @@
             <td>{{ $libro->paginas }}</td>
             <td>{{ $libro->categoria->categoria }}</td>
             <td>
-                <a href="{{ route('libro.show', [$libro]) }}" class="btn btn-primary">Editar</a>
-            </td>
-            <td>
-                <a href="{{ route('libro.show', [$libro]) }}" class="btn btn-danger">Borrar</a>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+                        Acciones
+                    </button>
+                    <div class="dropdown-menu bg-secondary">
+                        <a href="{{ route('libro.edit', [$libro]) }}" class="dropdown-item bg-warning">
+                            Editar
+                        </a>
+                        <form action="{{ route('libro.destroy', [$libro]) }}" method="POST" name="borrar">
+                            @method('DELETE')
+                            @csrf
+                            <button type="submit" class="dropdown-item bg-danger">Borrar</button>
+                        </form>
+                    </div>
+                </div>
             </td>
         </tr>
         @endforeach

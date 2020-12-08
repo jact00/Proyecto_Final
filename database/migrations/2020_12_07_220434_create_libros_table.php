@@ -22,6 +22,7 @@ class CreateLibrosTable extends Migration
             $table->year('anio');
             $table->unsignedSmallInteger('paginas');
             $table->foreignId('categoria_id')->constrained()->onDelete('restrict');
+            $table->softDeletes();
 
             $table->primary('isbn');
         });

@@ -19,7 +19,14 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+
    	Route::resource('libro', LibroController::class);
+
+   	Route::get('/log_out', function() {
+   		\Auth::logout();
+   		return redirect('/');
+   	})->name('salir');
+
 });
 
 

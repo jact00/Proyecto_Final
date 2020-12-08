@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
     <a class="navbar-brand" href="#">
-        <img src="suabelogo.png" alt="Logo" style="width:40px;">
+        <img src="{{ asset('suabelogo.png') }}" alt="Logo" style="width:40px;">
     </a>
     <span class="navbar-text">
         SUABE   
@@ -18,6 +18,13 @@
                     @else
                         Inventario
                     @endif
+                </a>
+            </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('salir') }}">
+                    Cerrar sesión
                 </a>
             </li>
         </ul>

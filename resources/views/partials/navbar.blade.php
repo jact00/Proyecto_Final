@@ -22,8 +22,13 @@
             </li>
         </ul>
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('salir') }}">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    {{\Auth::user()->nickname}}
+                </a>
+                <div class="dropdown-menu">
+                <a class="dropdown-item" href="#"> Perfil </a>
+                <a class="dropdown-item" href="{{ route('salir') }}">
                     Cerrar sesión
                 </a>
             </li>

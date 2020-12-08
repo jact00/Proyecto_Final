@@ -14,6 +14,7 @@
         <div class="page">
             <div class="page-single">
                 <div class="container" style="margin-top:80px">
+                    @include('partials.alerta')
                     @yield('contenido')
                 </div>
             </div>

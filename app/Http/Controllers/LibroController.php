@@ -44,7 +44,7 @@ class LibroController extends Controller
             'autor' => 'nullable|max:255',
             'editorial' => 'required|max:100',
             'edicion' => 'required|digits_between:1,4',
-            'anio' => 'required|integer|min:1900|max:2020',
+            'anio' => 'required|integer|min:1901|max:2020',
             'paginas' => 'required|digits_between:2,4',
         ]);
 
@@ -56,7 +56,11 @@ class LibroController extends Controller
 
         Libro::create($libro);
 
-        return redirect()->route('libro.index'); 
+        return redirect()->route('libro.index')->with([
+            'mensaje-alerta' => 'Libro agregado exitosamente.',
+            'titulo-alerta' => 'Acción exitosa!',
+            'tipo-alerta' => 'alert-success',
+        ]);
     }
 
     /**
@@ -67,7 +71,11 @@ class LibroController extends Controller
      */
     public function show(Libro $libro)
     {
-        //
+        return redirect()->route('libro.index')->with([
+            'mensaje-alerta' => 'La página a la que intentaste acceder no existe',
+            'titulo-alerta' => 'Oops...',
+            'tipo-alerta' => 'alert-info',
+        ]);
     }
 
     /**
@@ -96,7 +104,7 @@ class LibroController extends Controller
             'autor' => 'nullable|max:255',
             'editorial' => 'required|max:100',
             'edicion' => 'required|digits_between:1,4',
-            'anio' => 'required|integer|min:1900|max:2020',
+            'anio' => 'required|integer|min:1901|max:2020',
             'paginas' => 'required|digits_between:2,4',
         ]);
 
@@ -111,8 +119,9 @@ class LibroController extends Controller
         $libro->save();
 
         return redirect()->route('libro.index')->with([
-            'mensaje' => 'Libro editado exitosamente',
-            'alert-type' => 'alert-success',
+            'mensaje-alerta' => 'Libro editado exitosamente.',
+            'titulo-alerta' => 'Acción exitosa!',
+            'tipo-alerta' => 'alert-success',
         ]);
     }
 
@@ -125,6 +134,10 @@ class LibroController extends Controller
     public function destroy(Libro $libro)
     {
         $libro->delete();
-        return redirect()->route('libro.index');
+        return redirect()->route('libro.index')->with([
+            'mensaje-alerta' => 'Libro borrado exitosamente.',
+            'titulo-alerta' => 'Acción exitosa!',
+            'tipo-alerta' => 'alert-success',
+        ]);
     }
 }

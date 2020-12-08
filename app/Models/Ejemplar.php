@@ -13,12 +13,13 @@ class Ejemplar extends Model
     public $incrementing = false;
     protected $keyType = 'string';
     protected $table = 'ejemplares';
+    public $timestamps = false;
 
     protected $fillable = [
     	'isbn', 'en_prestamo',
     ];
 
-    public function Libro()
+    public function libro()
     {
         return $this->belongsTo('App\Models\Libro', 'isbn', 'isbn');
     }

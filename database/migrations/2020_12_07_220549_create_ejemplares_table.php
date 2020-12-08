@@ -15,12 +15,12 @@ class CreateEjemplaresTable extends Migration
     {
         Schema::create('ejemplares', function (Blueprint $table) {
             $table->string('isbn', 13);
-            $table->unsignedSmallInteger('numero')->autoincrement();
+            $table->unsignedSmallInteger('numero');
             $table->boolean('en_prestamo')->default(false);
 
 
             $table->primary(['isbn', 'numero']);
-            $table->foreign('isbn')->references('isbn')->on('libros');
+            $table->foreign('isbn')->references('isbn')->on('libros')->onDelete('cascade');
         });
     }
 

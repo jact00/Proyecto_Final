@@ -11,11 +11,12 @@
         <a href="{{ route('libro.create') }}" class="btn btn-primary"> Nuevo </a>
     </div>
 @endif
+
 <div class="card bg-secondary">
 <div class="card-body">
-<table class="table table-sm table-stripped">
+<table class="table table-sm table-striped">
     <thead>
-        <tr class="table-primary">
+        <tr class="table-primary text-center">
             <th scope="col">ISBN</th>
             <th scope="col">Nombre</th>
             <th scope="col">Autor</th>

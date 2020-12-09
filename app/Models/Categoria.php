@@ -19,4 +19,9 @@ class Categoria extends Model
     {
         return $this->hasMany('App\Models\Libro');
     }
+
+    public function getCategoriaAttribute($value)
+    {
+    	return ucwords(strtolower($value));
+    }
 }

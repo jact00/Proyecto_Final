@@ -33,4 +33,19 @@ class Libro extends Model
     {
         return $this->belongsTo('App\Models\Categoria');
     }
+
+    public function setNombreAttribute ($value)
+    {
+        $this->attributes['nombre'] = ucfirst(strtolower($value));
+    }
+
+    public function setAutorAttribute ($value)
+    {
+        $this->attributes['autor'] = ucwords(strtolower($value));
+    }
+
+    public function setEditorialAttribute ($value)
+    {
+        $this->attributes['editorial'] = ucwords(strtolower($value));
+    }
 }

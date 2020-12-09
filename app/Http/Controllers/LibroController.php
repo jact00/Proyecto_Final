@@ -79,10 +79,10 @@ class LibroController extends Controller
             $libro = $request->all();
 
 
-        Libro::create($libro);
+        $libro = Libro::create($libro);
 
         return redirect()->route('libro.index')->with([
-            'mensaje-alerta' => 'Libro ' . $libro->nombre . ' agregado exitosamente.',
+            'mensaje-alerta' => 'Libro ' . $libro->nombre . '('. $libro->isbn .') agregado exitosamente.',
             'titulo-alerta' => 'Acción exitosa!',
             'tipo-alerta' => 'alert-success',
         ]);
@@ -165,7 +165,7 @@ class LibroController extends Controller
         $libro->save();
 
         return redirect()->route('libro.index')->with([
-            'mensaje-alerta' => 'Libro ' . $libro->isbn . ' editado exitosamente.',
+            'mensaje-alerta' => 'Libro ' . $libro->nombre . '('. $libro->isbn .') editado exitosamente.',
             'titulo-alerta' => 'Acción exitosa!',
             'tipo-alerta' => 'alert-success',
         ]);

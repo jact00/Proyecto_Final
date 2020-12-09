@@ -75,4 +75,19 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\Operador');
     }
+
+    public function setNicknameAttribute($value)
+    {
+        $this->attributes['nickname'] = strtolower($value);
+    }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = ucwords(strtolower($value));
+    }
+
+    public function setApellidoAttribute($value)
+    {
+        $this->attributes['apellido'] = ucwords(strtolower($value));
+    }
 }

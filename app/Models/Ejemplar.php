@@ -32,4 +32,9 @@ class Ejemplar extends Model
     {
         return $this->belongsTo('App\Models\Libro', 'isbn', 'isbn');
     }
+
+    public function movimientos()
+    {
+        return $this->belongsToMany('App\Models\Movimiento');
+    }
 }

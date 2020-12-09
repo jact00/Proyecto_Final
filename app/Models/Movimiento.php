@@ -17,13 +17,13 @@ class Movimiento extends Model
         'operador_id',
     ];
 
-    protected $attributes [
+    protected $attributes = [
     	'es_prestamo' => 1,
-    ]
+    ];
 
     protected $casts = [
     	'es_prestamo' => 'boolean',
-    ]
+    ];
 
     public function prestamo()
     {
@@ -43,5 +43,10 @@ class Movimiento extends Model
     public function operador()
     {
     	return $this->belongsTo('App\Models\Operador', 'user_id', 'operador_id');
+    }
+
+    public function ejemplares()
+    {
+        return $this->belongsToMany('App\Models\Ejemplar');
     }
 }

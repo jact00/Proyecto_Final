@@ -20,11 +20,7 @@ class LibroSeeder extends Seeder
         	->count(10)
         	->has(
         		Ejemplar::factory()
-        			->count(8)
-        			->state(new Sequence(
-        				['en_prestamo' => 0],
-        				['en_prestamo' => 1],
-        			)),
+        			->count(8),
         		'ejemplares'
         	)
         	->create();

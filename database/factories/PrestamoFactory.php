@@ -42,6 +42,8 @@ class PrestamoFactory extends Factory
             {
                 $id = $this->faker->unique()->numberBetween($min, $max);
                 $ejemplar = Ejemplar::find($id);
+                $ejemplar->en_prestamo = true;
+                $ejemplar->save();
                 $prestamo->movimiento->ejemplares()->attach($ejemplar);
             }
         });

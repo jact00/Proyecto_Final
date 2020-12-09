@@ -35,9 +35,13 @@ class DevolucionFactory extends Factory
             //
         })->afterCreating(function (Devolucion $devolucion) {
             $ejemplares = $devolucion->prestamo->movimiento->ejemplares;
+            $devolucion->movimiento->alumno_id = $devolucion->prestamo->movimiento->alumno_id;
+            $devolucion->movimiento->save();
 
             foreach($ejemplares as $ejemplar)
             {
+                $ejemplar->en_prestamo = false;
+                $ejemplar->save();
                 $devolucion->movimiento->ejemplares()->attach($ejemplar->id);
             }
         });

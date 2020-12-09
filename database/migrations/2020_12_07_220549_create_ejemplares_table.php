@@ -17,7 +17,6 @@ class CreateEjemplaresTable extends Migration
             $table->string('isbn', 13);
             $table->unsignedSmallInteger('numero');
             $table->boolean('en_prestamo')->default(false);
-            $table->softDeletes();
 
             $table->primary(['isbn', 'numero']);
             $table->foreign('isbn')->references('isbn')->on('libros')->onDelete('cascade');

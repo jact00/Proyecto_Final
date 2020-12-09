@@ -9,7 +9,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Ejemplar extends Model
 {
     use HasFactory;
-    use SoftDeletes;
 
     protected $primaryKey = ['isbn', 'numero'];
     public $incrementing = false;
@@ -18,7 +17,15 @@ class Ejemplar extends Model
     public $timestamps = false;
 
     protected $fillable = [
-    	'isbn', 'en_prestamo',
+    	'isbn','numero', 'en_prestamo',
+    ];
+
+    protected $attributes = [
+        'en_prestamo' => 0,
+    ];
+
+    protected $casts = [
+        'en_prestamo' => 'boolean',
     ];
 
     public function libro()

@@ -13,10 +13,10 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('libro.index') }}">
-                    @if(\Auth::user()->es_estudiante)
-                        Catalogo
-                    @else
+                    @can('create', App\Models\Libro::class)
                         Inventario
+                    @else
+                        Catalogo
                     @endif
                 </a>
             </li>
@@ -29,7 +29,7 @@
                 <div class="dropdown-menu">
                 <a class="dropdown-item" href="#"> Perfil </a>
                 <a class="dropdown-item" href="{{ route('salir') }}">
-                    Cerrar sesión
+                    Salir
                 </a>
             </li>
         </ul>

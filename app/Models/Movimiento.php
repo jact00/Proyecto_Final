@@ -31,4 +31,9 @@ class Movimiento extends Model
     {
         return $this->belongsToMany('App\Models\Ejemplar')->as('prestamo')->withPivot('fecha_devolucion');
     }
+
+    public function ejemplares_en_prestamo()
+    {
+        return $this->belongsToMany('App\Models\Ejemplar')->withPivot('fecha_devolucion')->wherePivot('fecha_devolucion',null);
+    }
 }

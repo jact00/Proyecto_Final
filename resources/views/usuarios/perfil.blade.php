@@ -15,7 +15,7 @@ Perfil
 
 <div class="row">
     <div class ="col col-12 col-sm-6 col-md-5">
-        <h5> Actualizar Información </h5>
+        <h5> Actualizar Información <div class="d-inline text-warning"> (No implementado) </div> </h5>
         <p> Si deseas actualizar tu información únicamente cambia la información necesaria y presiona el botón "Guardar"</p>
     </div>
 
@@ -68,7 +68,7 @@ Perfil
 
 <div class="row d-flex flex-row-reverse">
     <div class ="col col-12 col-sm-6 col-md-7">
-        <h5> Actualizar Contraseña </h5>
+        <h5> Actualizar Contraseña <div class="text-warning d-inline"> (No implementado) </div> </h5>
         <p> Asegurate de usar una contraseña segura y que te sea difícil olvidar.</p>
     </div>
 
@@ -101,55 +101,62 @@ Perfil
     </div>
 </div>
 
+
+@if(\Auth::user()->es_estudiante)
+
+<hr>
+
 <div class="row">
     <div class ="col col-12 col-sm-6 col-md-5">
         <h5> Libros en posesión </h5>
         <p>Aquí se muestra la lista de libros que aun no has devuelto</p>
     </div>
 
+    @php
+
+    $movimientos = \Auth::user()->alumno->movimientos;
+    $tiene_libros = false;
+    foreach($movimientos as $movimiento)
+    {
+        if( $movimiento->ejemplares_en_prestamo()->count() > 0)
+            $tiene_libros = true;
+
+    }
+
+    @endphp
+
     <div class="col col-12 col-sm-6 col-md-7 mx-auto">
-        <form class="card border-primary mb-3" method="POST" action="">
-            @csrf
-            <div class="card-header">
-                <h5> 
-                    Información
-                </h5>
-            </div>
+        <div class="card border-info">
             <div class="card-body">
-                <div class="row">
-                    <div class="col col-12 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" for="name">Nombre</label>
-                            <input type="text" id="name" class="form-control" name="name" placeholder="Introduzca su nombre" value="{{ old('name') ?? \Auth::user()->name }}" required autofocus>
-                        </div>
-                    </div>
-                    <div class="col col-12 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" for="apellido">Apellido</label>
-                            <input type="text" id="apellido" class="form-control" name="apellido" placeholder="Introduzca su apellido" value="{{ old('apellido') ?? \Auth::user()->apellido }}" required autofocus>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col col-12 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" for="nickname">Nombre de usuario</label>
-                            <input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nombre de usuario" value="{{ old('nickname') ?? \Auth::user()->nickname }}" required autofocus>
-                        </div>
-                    </div>
-                    <div class="col col-12 col-md-6">
-                        <div class="form-group">
-                            <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" class="form-control" name="email" placeholder="Introduzca su email" value="{{ old('email') ?? \Auth::user()->email }}" required>
-                        </div>
-                    </div>
-                </div>
+                @if($tiene_libros)
+                <table class="table table-sm text-center table-striped mb-0">
+                    <thead>
+                        <tr class="text-center table-secondary">
+                            <th scope="col" class="align-middle">Nombre</th>
+                            <th scope="col" class="align-middle">Numero</th>
+                            <th scope="col" class="align-middle">Fecha de préstamo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($movimientos as $movimiento)
+                        @foreach($movimiento->ejemplares_en_prestamo as $ejemplar)
+                        <tr class="text-center">
+                            <th scope="row align-middle">{{ $ejemplar->libro->nombre }} </th>
+                            <td class="align-middle">{{ $ejemplar->numero }}</td>
+                            <td class="align-middle">{{ $movimiento->created_at }}</td>
+                        </tr>
+                        @endforeach
+                    @endforeach
+                    </tbody> 
+                </table>
+                @else
+                <h5> No hay libros <h5>
+                <p class="text-info"> No tienes ningun libro en posesión!. </p>
+                @endif
             </div>
-            <div class="card-footer text-right">
-                <button type="submit" class="btn btn-primary"> Guardar </button>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
+@endif
 
 @endsection 

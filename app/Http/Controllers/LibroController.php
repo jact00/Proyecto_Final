@@ -221,7 +221,7 @@ class LibroController extends Controller
         ]);
     }
 
-    public function eliminarEjemplar(Libro $libro, $numero)
+    public function eliminarEjemplar(Libro $libro, Ejemplar $ejemplar)
     {
         if(!\Auth::user()->can('update', Libro::class))
         {
@@ -232,9 +232,7 @@ class LibroController extends Controller
             ]);
         }
 
-        $ejemplar = Ejemplar::where('isbn', $libro->isbn)->where('numero', $numero);
-
-        if($ejemplar->get()->first()->en_prestamo)
+        if($ejemplar->en_prestamo)
             return redirect()->route('libro.show', compact('libro'))->with([
                 'mensaje-alerta' => 'Este ejemplar no se puede eliminar.',
                 'titulo-alerta' => 'Error!',
@@ -242,7 +240,6 @@ class LibroController extends Controller
             ]);
         
         $ejemplar->delete();
-
         $numero = $libro->loadCount('ejemplares')->ejemplares_count;
 
         if($numero == 0)

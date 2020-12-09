@@ -21,7 +21,14 @@ class Libro extends Model
     ];
 
     protected $fillable = [
-    	'isbn', 'nombre', 'autor', 'editorial', 'edicion', 'anio', 'paginas', 'categoria_id'
+    	'isbn', 
+        'nombre', 
+        'autor', 
+        'editorial', 
+        'edicion', 
+        'anio', 
+        'paginas', 
+        'categoria_id'
     ];
 
     public function ejemplares()

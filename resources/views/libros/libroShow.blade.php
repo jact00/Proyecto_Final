@@ -81,10 +81,16 @@ Libro
                             <th scope="row" class="align-middle">
                                 {{ $ejemplar->numero }}
                             </th>
-                            <td class="align-center">{{ $ejemplar->en_prestamo ? 'En prestamo':'Disponible' }}</td>
+                            <td class="align-center">
+                                @if($ejemplar->en_prestamo) 
+                                <a href="#" class= "btn btn-link">En prestamo</a>
+                                @else
+                                Disponible 
+                                @endif
+                            </td>
                             <td>
                                 @if(!$ejemplar->en_prestamo)
-                                <a href="{{ route('libro.eliminar_ejemplar', [$libro, $ejemplar->numero]) }}" class="btn btn-sm btn-outline-danger">
+                                <a href="{{ route('libro.eliminar_ejemplar', [$libro, $ejemplar]) }}" class="btn btn-sm btn-outline-danger">
                                     Eliminar
                                 </a>
                                 @endif

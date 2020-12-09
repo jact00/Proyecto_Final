@@ -9,15 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Ejemplar extends Model
 {
     use HasFactory;
+    use SoftDeletes;
 
-    protected $primaryKey = ['isbn', 'numero'];
-    public $incrementing = false;
-    protected $keyType = 'string';
     protected $table = 'ejemplares';
     public $timestamps = false;
 
     protected $fillable = [
-    	'isbn','numero', 'en_prestamo',
+    	'isbn',
+        'numero', 
+        'en_prestamo',
     ];
 
     protected $attributes = [

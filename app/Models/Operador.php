@@ -26,4 +26,9 @@ class Operador extends Model
     {
         return $this->belongsTo('App\Models\User');
     }
+
+    public function movimientos()
+    {
+        return $this->hasMany('App\Models\Movimiento', 'operador_id', 'user_id');
+    }
 }

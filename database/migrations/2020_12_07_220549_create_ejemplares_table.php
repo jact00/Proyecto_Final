@@ -14,11 +14,13 @@ class CreateEjemplaresTable extends Migration
     public function up()
     {
         Schema::create('ejemplares', function (Blueprint $table) {
+            $table->id();
             $table->string('isbn', 13);
-            $table->unsignedSmallInteger('numero');
+            $table->unsignedBigInteger('numero');
             $table->boolean('en_prestamo')->default(false);
+            $table->softDeletes();
 
-            $table->primary(['isbn', 'numero']);
+            $table->unique(['isbn', 'numero']);
             $table->foreign('isbn')->references('isbn')->on('libros')->onDelete('cascade');
         });
     }

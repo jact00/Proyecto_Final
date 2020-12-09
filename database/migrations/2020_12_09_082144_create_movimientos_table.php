@@ -17,7 +17,6 @@ class CreateMovimientosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('alumno_id');
             $table->unsignedBigInteger('operador_id');
-            $table->boolean('es_prestamo')->defaul(true);
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('alumno_id')->references('user_id')->on('alumnos')->onDelete('restrict');

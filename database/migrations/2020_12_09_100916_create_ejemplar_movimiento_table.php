@@ -16,6 +16,7 @@ class CreateEjemplarMovimientoTable extends Migration
         Schema::create('ejemplar_movimiento', function (Blueprint $table) {
             $table->foreignId('ejemplar_id')->constrained('ejemplares')->onDelete('restrict');
             $table->foreignId('movimiento_id')->constrained()->onDelete('restrict');
+            $table->timestamp('fecha_devolucion')->nullable();
             $table->primary(['ejemplar_id', 'movimiento_id']);
         });
     }

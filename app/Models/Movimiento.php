@@ -16,25 +16,7 @@ class Movimiento extends Model
         'alumno_id',
         'operador_id',
     ];
-
-    protected $attributes = [
-    	'es_prestamo' => 1,
-    ];
-
-    protected $casts = [
-    	'es_prestamo' => 'boolean',
-    ];
-
-    public function prestamo()
-    {
-    	return $this->hasOne('App\Models\Prestamo');
-    }
-
-    public function devolucion()
-    {
-    	return $this->hasOne('App\Models\Devolucion');
-    }
-
+    
     public function alumno()
     {
     	return $this->belongsTo('App\Models\Alumno', 'alumno_id', 'user_id');
@@ -47,6 +29,6 @@ class Movimiento extends Model
 
     public function ejemplares()
     {
-        return $this->belongsToMany('App\Models\Ejemplar');
+        return $this->belongsToMany('App\Models\Ejemplar')->as('prestamo')->withPivot('fecha_devolucion');
     }
 }

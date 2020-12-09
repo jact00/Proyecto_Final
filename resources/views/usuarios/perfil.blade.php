@@ -101,5 +101,55 @@ Perfil
     </div>
 </div>
 
+<div class="row">
+    <div class ="col col-12 col-sm-6 col-md-5">
+        <h5> Libros en posesión </h5>
+        <p>Aquí se muestra la lista de libros que aun no has devuelto</p>
+    </div>
+
+    <div class="col col-12 col-sm-6 col-md-7 mx-auto">
+        <form class="card border-primary mb-3" method="POST" action="">
+            @csrf
+            <div class="card-header">
+                <h5> 
+                    Información
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col col-12 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="name">Nombre</label>
+                            <input type="text" id="name" class="form-control" name="name" placeholder="Introduzca su nombre" value="{{ old('name') ?? \Auth::user()->name }}" required autofocus>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="apellido">Apellido</label>
+                            <input type="text" id="apellido" class="form-control" name="apellido" placeholder="Introduzca su apellido" value="{{ old('apellido') ?? \Auth::user()->apellido }}" required autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-12 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="nickname">Nombre de usuario</label>
+                            <input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nombre de usuario" value="{{ old('nickname') ?? \Auth::user()->nickname }}" required autofocus>
+                        </div>
+                    </div>
+                    <div class="col col-12 col-md-6">
+                        <div class="form-group">
+                            <label class="form-label" for="email">Email</label>
+                            <input type="email" id="email" class="form-control" name="email" placeholder="Introduzca su email" value="{{ old('email') ?? \Auth::user()->email }}" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer text-right">
+                <button type="submit" class="btn btn-primary"> Guardar </button>
+            </div>
+        </form>
+    </div>
+</div>
 
 @endsection 

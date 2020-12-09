@@ -3,8 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Prestamo;
-use App\Models\Devolucion;
+use App\Models\Movimiento;
 
 class MovimientoSeeder extends Seeder
 {
@@ -15,7 +14,6 @@ class MovimientoSeeder extends Seeder
      */
     public function run()
     {
-    	Prestamo::factory()->count(10)->create();
-    	Devolucion::factory()->count(5)->create();
+    	Movimiento::factory()->count(20)->create();
     }
 }

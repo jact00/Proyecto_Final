@@ -3,8 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Movimiento;
-use App\Models\Alumno;
-use App\Models\Operador;
+use App\Models\Ejemplar;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class MovimientoFactory extends Factory
@@ -29,12 +28,27 @@ class MovimientoFactory extends Factory
         ];
     }
 
-    public function devolucion()
+    public function configure()
     {
-        return $this->state(function (array $attributes) {
-            return [
-                'es_prestamo' => 0,
-            ];
+        return $this->afterMaking(function (Movimiento $movimiento) {
+            //
+        })->afterCreating(function (Movimiento $movimiento) {
+            $cantidad = $this->faker->numberBetween(1,3);
+            $min = \DB::table('ejemplares')->min('id');
+            $max = \DB::table('ejemplares')->max('id');
+
+            for(;$cantidad > 0; $cantidad--)
+            {
+                $prestamo = $this->faker->numberBetween(0,1);
+                $id = $this->faker->unique()->numberBetween($min, $max);
+                $ejemplar = Ejemplar::find($id);
+                $ejemplar->en_prestamo = $prestamo;
+                $ejemplar->save();
+                if($ejemplar->en_prestamo)
+                    $movimiento->ejemplares()->attach($ejemplar);
+                else
+                    $movimiento->ejemplares()->attach($ejemplar,  ['fecha_devolucion' => now()]);
+            }
         });
     }
 }

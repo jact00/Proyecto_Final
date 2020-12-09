@@ -27,7 +27,7 @@ Route::middleware('auth')->group(function () {
 
    	Route::get('/libro/{libro}/agregar_ejemplar', 
    		[LibroController::class, 'agregarEjemplar'])->name('libro.agregar_ejemplar');
-   	Route::get('/libro/{libro}/eliminar_ejemplar', 
+   	Route::get('/libro/{libro}/eliminar_ejemplar/{ejemplar}', 
    		[LibroController::class, 'eliminarEjemplar'])->name('libro.eliminar_ejemplar');
    	Route::resource('libro', LibroController::class);
 

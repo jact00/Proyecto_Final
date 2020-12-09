@@ -18,7 +18,7 @@ class LibroController extends Controller
      */
     public function index()
     {
-        $libros = Libro::with('ejemplares')->withCount([
+        $libros = Libro::with(['ejemplares','categoria'])->withCount([
             'ejemplares',
             'ejemplares as ejemplares_en_prestamo' => function(Builder $query) {
                 $query->where('en_prestamo', true);
@@ -104,6 +104,8 @@ class LibroController extends Controller
                 'tipo-alerta' => 'alert-info',
             ]);
         }
+
+        return view('libros/libroShow', compact('libro'));
     }
 
     /**
@@ -212,47 +214,55 @@ class LibroController extends Controller
             'numero' => $numero + 1,
         ]);
 
-        return redirect()->route('libro.index')->with([
-            'mensaje-alerta' => 'Ejemplar de '. $libro->nombre .' agregado exitosamente.',
+        return redirect()->route('libro.show',compact('libro'))->with([
+            'mensaje-alerta' => 'Ejemplar agregado exitosamente.',
             'titulo-alerta' => 'Acción exitosa!',
             'tipo-alerta' => 'alert-success',
         ]);
     }
 
-    public function eliminarEjemplar(Libro $libro)
+    public function eliminarEjemplar(Libro $libro, $numero)
     {
         if(!\Auth::user()->can('update', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->route('libro.show', compact('libro'))->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',
             ]);
         }
 
-        $numero = Ejemplar::where('isbn', $libro->isbn)->max('numero');
+        $ejemplar = Ejemplar::where('isbn', $libro->isbn)->where('numero', $numero);
+
+        if($ejemplar->get()->first()->en_prestamo)
+            return redirect()->route('libro.show', compact('libro'))->with([
+                'mensaje-alerta' => 'Este ejemplar no se puede eliminar.',
+                'titulo-alerta' => 'Error!',
+                'tipo-alerta' => 'alert-danger',
+            ]);
+        
+        $ejemplar->delete();
+
+        $numero = $libro->loadCount('ejemplares')->ejemplares_count;
 
         if($numero == 0)
-            return redirect()->route('libro.index')->with([
-                'mensaje-alerta' => 'Este libro no cuenta con ejemplares.',
-                'titulo-alerta' => 'Oops...',
-                'tipo-alerta' => 'alert-info',
-            ]);
-
-        $Ejemplar = Ejemplar::where('isbn', $libro->isbn)->where('numero', $numero);
-        $Ejemplar->delete();
-
-        if($numero == 2)
-            return redirect()->route('libro.index')->with([
-                'mensaje-alerta' => 'Ejemplar de ' . $libro->nombre . ' eliminado exitosamente. Unicamente queda un ejemplar!',
+            return redirect()->route('libro.show', compact('libro'))->with([
+                'mensaje-alerta' => 'Ejemplar eliminado exitosamente. El libro se quedo sin ejemplares!',
                 'titulo-alerta' => 'Advertencia!',
                 'tipo-alerta' => 'alert-warning',
             ]);
 
-        return redirect()->route('libro.index')->with([
-            'mensaje-alerta' => 'Ejemplar de ' . $libro->nombre . ' eliminado exitosamente.',
-            'titulo-alerta' => 'Acción exitosa!',
-            'tipo-alerta' => 'alert-success',
-        ]);
+        else if($numero == 1)
+            return redirect()->route('libro.show', compact('libro'))->with([
+                'mensaje-alerta' => 'Ejemplar eliminado exitosamente. Unicamente queda un ejemplar!',
+                'titulo-alerta' => 'Advertencia!',
+                'tipo-alerta' => 'alert-warning',
+            ]);
+        else 
+            return redirect()->route('libro.show', compact('libro'))->with([
+                'mensaje-alerta' => 'Ejemplar eliminado exitosamente.',
+                'titulo-alerta' => 'Acción exitosa!',
+                'tipo-alerta' => 'alert-success',
+            ]);
     }
 }

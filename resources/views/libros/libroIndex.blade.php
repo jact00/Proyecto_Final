@@ -6,10 +6,8 @@ Libros
 
 @section('contenido')
 
-<div class="page-header mb-3">
+<div class="page-header text-center mb-3">
     <br>
-    <div class="row">
-        <div class="col col-11">
             <h3> 
             @can('create', App\Models\Libro::class)
                 Inventario
@@ -17,15 +15,11 @@ Libros
                 Catálogo
             @endcan
             </h3>
-        </div>
         @can('create', App\Models\Libro::class)
-        <div class="col col-1">
             <div class="text-mutex text-right mb-2" inline>
-                <a href="{{ route('libro.create') }}" class="btn btn-primary"> Nuevo </a>
+                <a href="{{ route('libro.create') }}" class="btn btn-success"> Agregar </a>
             </div>
-        </div>
         @endcan
-    </div>
 </div>
 
 <div class="card bg-secondary">
@@ -41,9 +35,14 @@ Libros
             <th scope="col">Año</th>
             <th scope="col">Páginas</th>
             <th scope="col">Categoría</th>
-            <th scope="col">Ejemplares</th>
+            <th scope="col">
+            @cannot('view', App\Models\Libro::class)
+                Disponibles
+            @else
+                Ejemplares
+            @endcannot
+            </th>
             @can('update', App\Models\Libro::class)
-            <th scope="col"> </th>
             <th scope="col"> </th>
             <th scope="col"> </th>
             @endcan
@@ -52,7 +51,15 @@ Libros
     <tbody>
         @foreach ($libros as $libro)
         <tr class="table-secondary">
-            <th scope="row" class="align-middle">{{ $libro->isbn }}</th>
+            <th scope="row" class="align-middle">
+                @can('view', App\Models\Libro::class)
+                    <a href="{{ route('libro.show',[$libro]) }}" class="btn btn-link">
+                        {{ $libro->isbn }}
+                    </a>
+                @else
+                    {{ $libro->isbn}}
+                @endcan
+            </th>
             <td class="align-middle">{{ $libro->nombre }}</td>
             <td class="align-middle">{{ $libro->autor }}</td>
             <td class="align-middle">{{ $libro->editorial }}</td>
@@ -68,21 +75,6 @@ Libros
             @endcannot
             </td>
             @can('update', App\Models\Libro::class)
-            <td>
-                <div class="row">
-                    <div class="col col-12">
-                        <a href="{{ route('libro.agregar_ejemplar',[$libro])}}" class="btn btn-sm btn-outline-warning btn-block">
-                            +
-                        </a>
-                    </div>
-                    <div class="col col-12">
-                        <a href="{{ route('libro.eliminar_ejemplar',[$libro]) }}" class="btn btn-sm btn-outline-warning btn-block">
-                            -
-                        </a>
-                    </div>
-                </div>
-
-            </td>
             <td class="align-middle">
                 <a href="{{ route('libro.edit', [$libro]) }}" class="btn btn-primary">Editar</a>
             </td>

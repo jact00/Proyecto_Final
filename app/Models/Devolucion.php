@@ -28,7 +28,7 @@ class Devolucion extends Model
 
     public function prestamo()
     {
-    	return $this->belongsTo('App\Models\Prestamo', 'movimiento_id', 'prestamo_id');
+    	return $this->belongsTo('App\Models\Prestamo', 'prestamo_id', 'movimiento_id');
     }
 }
 

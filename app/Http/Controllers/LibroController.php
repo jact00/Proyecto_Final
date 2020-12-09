@@ -6,6 +6,7 @@ use App\Models\Libro;
 use App\Models\Ejemplar;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
+use App\Models\Devolucion;
 use Illuminate\Database\Eloquent\Builder;
 
 class LibroController extends Controller
@@ -18,6 +19,7 @@ class LibroController extends Controller
      */
     public function index()
     {
+
         $libros = Libro::with(['ejemplares','categoria'])->withCount([
             'ejemplares',
             'ejemplares as ejemplares_en_prestamo' => function(Builder $query) {

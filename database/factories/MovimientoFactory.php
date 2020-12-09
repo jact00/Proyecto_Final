@@ -28,4 +28,13 @@ class MovimientoFactory extends Factory
             'operador_id' => \DB::table('operadores')->inRandomOrder()->pluck('user_id')->first(),
         ];
     }
+
+    public function devolucion()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'es_prestamo' => 0,
+            ];
+        });
+    }
 }

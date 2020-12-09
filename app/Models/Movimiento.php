@@ -37,12 +37,12 @@ class Movimiento extends Model
 
     public function alumno()
     {
-    	return $this->belongsTo('App\Models\Alumno', 'user_id', 'alumno_id');
+    	return $this->belongsTo('App\Models\Alumno', 'alumno_id', 'user_id');
     }
 
     public function operador()
     {
-    	return $this->belongsTo('App\Models\Operador', 'user_id', 'operador_id');
+    	return $this->belongsTo('App\Models\Operador', 'operador_id', 'user_id');
     }
 
     public function ejemplares()

@@ -26,44 +26,17 @@ Registro
             <div class="form-group">
                 <label class="form-label" for="nickname">Nombre de usuario</label>
                 <input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nombre de usuario" value="{{ old('nickname') }}" required autofocus>
-                @if($errors->has('nickname'))
-                    <div class="invalid-feedback">
-                        <ul>
-                        @foreach($errors->get('nickname') as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                @endif
             </div>
         </div>
         <div class="col-6">
             <div class="form-group">
                 <label class="form-label" for="email">Email</label>
                 <input type="email" id="email" class="form-control" name="email" placeholder="Introduzca su email" value="{{ old('email') }}" required>
-                @if($errors->has('email'))
-                    <div class="invalid-feedback">
-                        <ul>
-                        @foreach($errors->get('email') as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                @endif
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="password">Contraseña</label>
                 <input type="password" id="password" class="form-control" name="password" placeholder="Contraseña" required>
-                @if($errors->has('password'))
-                    <div class="invalid-feedback">
-                        <ul>
-                        @foreach($errors->get('password') as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                        </ul>
-                    </div>
-                @endif
             </div>
             <div class="form-group">
                 <label class="form-label" for="password_confirmation">Confirmar contraseña</label>

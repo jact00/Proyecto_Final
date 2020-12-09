@@ -27,7 +27,7 @@
                     {{\Auth::user()->nickname}}
                 </a>
                 <div class="dropdown-menu">
-                <a class="dropdown-item" href="#"> Perfil </a>
+                <a class="dropdown-item" href="{{ route('perfil') }}"> Perfil </a>
                 <a class="dropdown-item" href="{{ route('salir') }}">
                     Salir
                 </a>

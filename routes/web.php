@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
+use App\Http\Controllers\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,8 @@ Route::middleware('auth')->group(function () {
    	Route::get('/libro/{libro}/eliminar_ejemplar/{ejemplar}', 
    		[LibroController::class, 'eliminarEjemplar'])->name('libro.eliminar_ejemplar');
    	Route::resource('libro', LibroController::class);
+
+    Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil');
 
 });
 

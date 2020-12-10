@@ -42,7 +42,7 @@ class MovimientoFactory extends Factory
                 $prestamo = $this->faker->numberBetween(0,1);
                 $id = $this->faker->unique()->numberBetween($min, $max);
                 $ejemplar = Ejemplar::find($id);
-                $ejemplar->en_prestamo = $prestamo;
+                $ejemplar->en_prestamo = $prestamo == 1 ? true:false;
                 $ejemplar->save();
                 if($ejemplar->en_prestamo)
                     $movimiento->ejemplares()->attach($ejemplar);

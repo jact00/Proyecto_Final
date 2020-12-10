@@ -14,12 +14,12 @@ Perfil
 </div>
 
 <div class="row">
-    <div class ="col col-12 col-sm-6 col-md-5">
+    <div class ="col col-12 col-sm-5">
         <h5> Actualizar Información <small class="text-warning"> (No implementado) </small> </h5>
         <p> Si deseas actualizar tu información únicamente cambia la información necesaria y presiona el botón "Guardar"</p>
     </div>
 
-    <div class="col col-12 col-sm-6 col-md-7 mx-auto">
+    <div class="col col-12 col-sm-7 mx-auto">
         <form class="card border-primary mb-3" method="POST" action="">
             @csrf
             <div class="card-header">
@@ -67,12 +67,12 @@ Perfil
 <hr>
 
 <div class="row d-flex flex-row-reverse">
-    <div class ="col col-12 col-sm-6 col-md-7">
+    <div class ="col col-12 col-sm-5 col-md-7">
         <h5> Actualizar Contraseña <small class="text-warning"> (No implementado) </small> </h5>
         <p> Asegurate de usar una contraseña segura y que te sea difícil olvidar.</p>
     </div>
 
-    <div class="col col-12 col-sm-6 col-md-5 mx-auto">
+    <div class="col col-12 col-sm-7 col-md-5 mx-auto">
         <form class="card border-warning mb-3" method="POST" action="">
             @csrf
             <div class="card-header">
@@ -131,7 +131,8 @@ Perfil
                 @if($tiene_libros)
                 <table class="table table-sm text-center table-striped mb-0">
                     <thead>
-                        <tr class="text-center table-secondary">
+                        <tr class="text-center table-dark">
+                            <th scope="col" class="align-middle">ISBN</th>
                             <th scope="col" class="align-middle">Nombre</th>
                             <th scope="col" class="align-middle">Numero</th>
                             <th scope="col" class="align-middle">Fecha de préstamo</th>
@@ -141,7 +142,8 @@ Perfil
                     @foreach($movimientos as $movimiento)
                         @foreach($movimiento->ejemplares_en_prestamo as $ejemplar)
                         <tr class="text-center">
-                            <th scope="row align-middle">{{ $ejemplar->libro->nombre }} </th>
+                            <th scope="row" class="align-middle">{{ $ejemplar->libro->isbn }} </th>
+                            <td class="align-middle">{{ $ejemplar->libro->nombre }} </td>
                             <td class="align-middle">{{ $ejemplar->numero }}</td>
                             <td class="align-middle">{{ $movimiento->created_at }}</td>
                         </tr>

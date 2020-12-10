@@ -8,25 +8,21 @@ Inicio de sesión
 
 <form class="card bg-primary mb-3" method="POST" action="{{ route('login') }}">
     @csrf
-
     <div class="card-body">
         <h4 class="card-title">Inicia sesión en tu cuenta</h4>
         <div class="row">
-        <div class="col-6">
-            <div class="form-group">
-                <label class="form-label" for="nickname">Nombre de usuario</label>
-                <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="nicknameHelp" placeholder="Introduce tu nombre de usuario" value="{{ old('nickname') }}" required autofocus>
-            </div>
-        </div>
-        <div class="col-6">
-            <div class="form-group">
-                <label class="form-label" for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña" name="password" required>
-                <div class ="text-right mt-1">
-                    <a href="{{ route('password.request') }}" class="float-left">¿Olvidaste tu contraseña?</a>
+            <div class="col col-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-label" for="nickname">Nombre de usuario</label>
+                    <input type="text" class="form-control" id="nickname" name="nickname" aria-describedby="nicknameHelp" placeholder="Introduce tu nombre de usuario" value="{{ old('nickname') }}" required autofocus>
                 </div>
             </div>
-        </div>
+            <div class="col col-12 col-md-6">
+                <div class="form-group">
+                    <label class="form-label" for="password">Contraseña</label>
+                    <input type="password" class="form-control" id="password" placeholder="Introduce tu contraseña" name="password" required>
+                </div>
+            </div>
         </div>
     </div>
     <div class="card-footer text-center">

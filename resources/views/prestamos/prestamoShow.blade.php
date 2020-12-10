@@ -48,14 +48,14 @@ Prestamos
     </div>
 
     <div class="col col-12 col-md-6 col-lg-8 mx-auto">
-        <div class="card border-primary">
+        <div class="card border-info">
             <div class="card-header">
                 <h4> Ejemplares </h4>                
             </div>
-            <div class="card-body">
-                <table class="table w-100 d-block d-md-table rounded border-primary table-responsive table-sm text-center table-striped">
+            <div class="card-body table-responsive">
+                <table class="table table-sm text-center table-hover rounded">
                     <thead>
-                        <tr class="table-primary text-center">
+                        <tr class="table-dark">
                             <th scope="col" class="align-middle">ISBN</th>
                             <th scope="col" class="align-middle">Nombre</th>
                             <th scope="col" class="align-middle">Numero</th>
@@ -66,32 +66,31 @@ Prestamos
                         @foreach($prestamo->ejemplares as $ejemplar)
                         <tr class="table-secondary">
                             <th scope="row" class="align-middle">
-                                {{ $ejemplar->libro->isbn }}
+                                <a href="{{route('libro.show', [$ejemplar->libro])}}" class="btn btn-link">
+                                    {{ $ejemplar->libro->isbn }}
+                                </a>
                             </th>
-                            <th scope="row" class="align-middle">
+                            <td class="align-middle text-left">
                                 {{ $ejemplar->libro->nombre }}
-                            </th>
-                            <td class="align-center">
+                            </td>
+                            <td class="align-middle">
                                 {{ $ejemplar->numero }}
                             </td>
-                            <td>
+                            <td class="align-middle">
                                 @if($ejemplar->prestamo->fecha_devolucion == null)
-                                    <form action="{{ route('prestamo.devolver_ejemplar', [$prestamo, $ejemplar]) }}" method="POST">
-                                        @method('patch')
-                                        @csrf
-                                        <button class="btn btn-warning">Devolver</button>
-                                    </form>
+                                <form action="{{ route('prestamo.devolver_ejemplar', [$prestamo, $ejemplar]) }}" method="POST">
+                                    @method('patch')
+                                    @csrf
+                                    <button class="btn btn-warning">Devolver</button>
+                                </form>
                                 @else
-                                    Devuelto el: {{ \Carbon\Carbon::parse($ejemplar->prestamo->fecha_devolucion)->format('d/m/Y') }}
+                                Devuelto el: {{ \Carbon\Carbon::parse($ejemplar->prestamo->fecha_devolucion)->format('d/m/Y') }}
                                 @endif
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-            <div class="card-footer text-center">
-
             </div>
         </div>
     </div>

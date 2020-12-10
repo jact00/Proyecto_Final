@@ -35,6 +35,11 @@ class Ejemplar extends Model
 
     public function movimientos()
     {
-        return $this->belongsToMany('App\Models\Movimiento')->withPivot('fecha_devolucion');
+        return $this->belongsToMany('App\Models\Movimiento')->as('prestamo')->withPivot('fecha_devolucion');
+    }
+
+    public function prestamo_actual()
+    {
+        return $this->belongsToMany('App\Models\Movimiento')->withPivot('fecha_devolucion')->wherePivot('fecha_devolucion',null);
     }
 }

@@ -23,23 +23,23 @@ Libros
             </div>
             <div class="card-body">
                 <ul class="list-group">
-                    <li class="list-group-item ">
+                    <li class="list-group-item border-primary">
                         Autor: {{$libro->autor}}
                     </li>
 
-                    <li class="list-group-item">
+                    <li class="list-group-item border-primary">
                         Editorial: {{$libro->editorial}}
                     </li>
-                    <li class="list-group-item ">
+                    <li class="list-group-item border-primary">
                         Edición: {{$libro->edicion}}
                     </li>
-                    <li class="list-group-item ">
+                    <li class="list-group-item border-primary">
                         Año: {{$libro->anio}}
                     </li>
-                    <li class="list-group-item ">
+                    <li class="list-group-item border-primary">
                         Páginas: {{$libro->paginas}}
                     </li>
-                    <li class="list-group-item ">
+                    <li class="list-group-item border-primary">
                         Categoria: {{$libro->categoria->categoria}}
                     </li>
                 </ul>
@@ -82,8 +82,8 @@ Libros
                                 {{ $ejemplar->numero }}
                             </th>
                             <td class="align-center">
-                                @if($ejemplar->en_prestamo) 
-                                <a href="#" class= "btn btn-link">En prestamo</a>
+                                @if($ejemplar->en_prestamo)
+                                <a href="{{route('prestamo.show', [$ejemplar->prestamo_actual->first()->id])}}" class= "btn btn-link">En prestamo</a>
                                 @else
                                 Disponible 
                                 @endif

@@ -13,8 +13,8 @@
             <div class="page-single">
                 <div class="container">
                     <div class="row">
-                        <div class="col col-8 mx-auto">
-                            <div class="text-center mb-6 d-block">
+                        <div class="col col-10 col-lg-8 col-xl-7 mx-auto">
+                            <div class="text-center mb-6 ">
                                 <img src="{{ asset('suabe.png') }}" class="h-6" alt = "" >
                             </div>
 

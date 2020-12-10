@@ -15,7 +15,7 @@ Perfil
 
 <div class="row">
     <div class ="col col-12 col-sm-5">
-        <h5> Actualizar Información <small class="text-warning"> (No implementado) </small> </h5>
+        <h5> Actualizar Información </h5>
         <p> Si deseas actualizar tu información únicamente cambia la información necesaria y presiona el botón "Guardar"</p>
     </div>
 
@@ -81,7 +81,7 @@ Perfil
 
 <div class="row d-flex flex-row-reverse">
     <div class ="col col-12 col-sm-5 col-md-7">
-        <h5> Actualizar Contraseña <small class="text-warning"> (No implementado) </small> </h5>
+        <h5> Actualizar Contraseña </h5>
         <p> Asegurate de usar una contraseña segura y que te sea difícil olvidar.</p>
     </div>
 

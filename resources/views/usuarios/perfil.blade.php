@@ -20,8 +20,9 @@ Perfil
     </div>
 
     <div class="col col-12 col-sm-7 mx-auto">
-        <form class="card border-primary mb-3" method="POST" action="">
+        <form class="card border-primary mb-3" method="POST" action="{{ route('actualizar_datos') }}">
             @csrf
+            @method('PATCH')
             <div class="card-header">
                 <h5> 
                     Información
@@ -29,30 +30,42 @@ Perfil
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col col-12 col-md-6">
+                    <div class="col col-12 col-lg-6">
                         <div class="form-group">
                             <label class="form-label" for="name">Nombre</label>
+                            @if($errors->has('name'))
+                            <input type="text" id="name" class="form-control is-invalid" name="name" placeholder="Introduzca su nombre" value="{{ old('name') ?? \Auth::user()->name }}" required autofocus>
+                            @else
                             <input type="text" id="name" class="form-control" name="name" placeholder="Introduzca su nombre" value="{{ old('name') ?? \Auth::user()->name }}" required autofocus>
+                            @endif
                         </div>
                     </div>
-                    <div class="col col-12 col-md-6">
+                    <div class="col col-12 col-lg-6">
                         <div class="form-group">
                             <label class="form-label" for="apellido">Apellido</label>
+                            @if($errors->has('apellido'))
+                            <input type="text" id="apellido" class="form-control is-invalid" name="apellido" placeholder="Introduzca su apellido" value="{{ old('apellido') ?? \Auth::user()->apellido }}" required autofocus>
+                            @else
                             <input type="text" id="apellido" class="form-control" name="apellido" placeholder="Introduzca su apellido" value="{{ old('apellido') ?? \Auth::user()->apellido }}" required autofocus>
+                            @endif
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col col-12 col-md-6">
+                    <div class="col col-12 col-lg-6">
                         <div class="form-group">
                             <label class="form-label" for="nickname">Nombre de usuario</label>
-                            <input type="text" id="nickname" class="form-control" name="nickname" placeholder="Nombre de usuario" value="{{ old('nickname') ?? \Auth::user()->nickname }}" required autofocus>
+                            <input type="text" id="nickname" class="form-control {{ $errors->has('nickname') ? 'is-invalid':'' }}" name="nickname" placeholder="Nombre de usuario" value="{{ old('nickname') ?? \Auth::user()->nickname }}" required autofocus>
                         </div>
                     </div>
-                    <div class="col col-12 col-md-6">
+                    <div class="col col-12 col-lg-6">
                         <div class="form-group">
                             <label class="form-label" for="email">Email</label>
-                            <input type="email" id="email" class="form-control" name="email" placeholder="Introduzca su email" value="{{ old('email') ?? \Auth::user()->email }}" required>
+                            @if($errors->has('email'))
+                            <input type="email" id="email" class="form-control is-invalid" name="email" placeholder="Introduzca su email" value="{{ old('email') ?? \Auth::user()->email }}" required autofocus>
+                            @else
+                            <input type="email" id="email" class="form-control" name="email" placeholder="Introduzca su email" value="{{ old('email') ?? \Auth::user()->email }}" required autofocus>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -73,17 +86,13 @@ Perfil
     </div>
 
     <div class="col col-12 col-sm-7 col-md-5 mx-auto">
-        <form class="card border-warning mb-3" method="POST" action="">
+        <form class="card border-warning mb-3" method="POST" action="{{ route('actualizar_contrasenia') }}">
             @csrf
-            <div class="card-header">
-                <h5> 
-                    Información
-                </h5>
-            </div>
+            @method('PATCH')
             <div class="card-body">
                 <div class="form-group">
-                    <label class="form-label" for="old_password">Antigua contraseña</label>
-                    <input type="password" id="old_password" class="form-control" name="old_password" placeholder="Antigua contraseña" required>
+                    <label class="form-label" for="current_password">Contraseña actual</label>
+                    <input type="password" id="current_password" class="form-control" name="current_password" placeholder="Contraseña actual" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label" for="new_password">Nueva contraseña</label>

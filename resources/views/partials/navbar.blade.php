@@ -26,9 +26,9 @@
                     Prestamos
                 </a>
             </li>
-            @if(!\Auth::user()->operador->es_admin)
+            @if(\Auth::user()->operador->es_admin)
             <li class="nav-item">
-                <a class="nav-link bg-warning" href="{{ route('agregar_operador') }}">
+                <a class="nav-link bg-warning rounded" href="{{ route('agregar_operador') }}">
                     Registrar Operador
                 </a>
             </li>

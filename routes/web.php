@@ -34,11 +34,15 @@ Route::middleware('auth')->group(function () {
    		[LibroController::class, 'eliminarEjemplar'])->name('libro.eliminar_ejemplar');
    	Route::resource('libro', LibroController::class);
 
-    Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil');
-
     Route::patch('/prestamo/{prestamo}/devolver_ejemplar/{ejemplar}', 
       [MovimientoController::class, 'devolver_ejemplar'])->name('prestamo.devolver_ejemplar');
     Route::resource('prestamo', MovimientoController::class);
+
+    Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil');
+    Route::patch('/perfil/actualizar_datos', [UserController::class, 'actualizar_datos'])->name('actualizar_datos');
+    Route::patch('/perfil/actualizar_contrasenia', [UserController::class, 'actualizar_contrasenia'])->name('actualizar_contrasenia');
+    Route::get('/agregar_operador', [UserController::class, 'agregar_operador'])->middleware('admin')->name('agregar_operador');
+    Route::post('/agregar_operador', [UserController::class, 'registrar_operador'])->middleware('admin')->name('registrar_operador');
 
 });
 

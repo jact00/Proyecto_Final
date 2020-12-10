@@ -15,7 +15,7 @@ Perfil
 
 <div class="row">
     <div class ="col col-12 col-sm-6 col-md-5">
-        <h5> Actualizar Información <div class="d-inline text-warning"> (No implementado) </div> </h5>
+        <h5> Actualizar Información <small class="text-warning"> (No implementado) </small> </h5>
         <p> Si deseas actualizar tu información únicamente cambia la información necesaria y presiona el botón "Guardar"</p>
     </div>
 
@@ -68,7 +68,7 @@ Perfil
 
 <div class="row d-flex flex-row-reverse">
     <div class ="col col-12 col-sm-6 col-md-7">
-        <h5> Actualizar Contraseña <div class="text-warning d-inline"> (No implementado) </div> </h5>
+        <h5> Actualizar Contraseña <small class="text-warning"> (No implementado) </small> </h5>
         <p> Asegurate de usar una contraseña segura y que te sea difícil olvidar.</p>
     </div>
 
@@ -107,9 +107,9 @@ Perfil
 <hr>
 
 <div class="row">
-    <div class ="col col-12 col-sm-6 col-md-5">
+    <div class ="col col-12 col-sm-12 col-md-5">
         <h5> Libros en posesión </h5>
-        <p>Aquí se muestra la lista de libros que aun no has devuelto</p>
+        <p>Aquí se muestra la lista de libros que aun no has devuelto.</p>
     </div>
 
     @php
@@ -125,7 +125,7 @@ Perfil
 
     @endphp
 
-    <div class="col col-12 col-sm-6 col-md-7 mx-auto">
+    <div class="col col-12 col-sm-12 col-md-7 mx-auto">
         <div class="card border-info">
             <div class="card-body">
                 @if($tiene_libros)

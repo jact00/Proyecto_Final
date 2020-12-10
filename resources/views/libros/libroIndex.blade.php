@@ -24,7 +24,7 @@ Libros
 
 <div class="card bg-secondary">
 <div class="card-body">
-<table class="table table-responsive table-sm text-center table-striped mb-0 rounded">
+<table class="table w-100 table-responsive table-sm text-center table-striped mb-0 rounded">
     <thead>
         <tr class="table-primary text-center">
             <th scope="col">ISBN</th>

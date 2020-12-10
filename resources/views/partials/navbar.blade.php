@@ -20,6 +20,13 @@
                     @endif
                 </a>
             </li>
+            @if(!\Auth::user()->es_estudiante)
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('prestamo.index') }}">
+                    Prestamos
+                </a>
+            </li>
+            @endif
         </ul>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">

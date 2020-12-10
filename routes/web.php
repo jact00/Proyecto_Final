@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MovimientoController;
 
 
 /*
@@ -34,6 +35,10 @@ Route::middleware('auth')->group(function () {
    	Route::resource('libro', LibroController::class);
 
     Route::get('/perfil', [UserController::class, 'perfil'])->name('perfil');
+
+    Route::patch('/prestamo/{prestamo}/devolver_ejemplar/{ejemplar}', 
+      [MovimientoController::class, 'devolver_ejemplar'])->name('prestamo.devolver_ejemplar');
+    Route::resource('prestamo', MovimientoController::class);
 
 });
 

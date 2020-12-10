@@ -1,7 +1,7 @@
 @extends('layouts.suabe')
 
 @section('titulo')
-Nuevo libro
+Libros
 @endsection
 
 @section('contenido')

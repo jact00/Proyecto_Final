@@ -1,7 +1,7 @@
 @extends('layouts.suabe')
 
 @section('titulo')
-Libro
+Libros
 @endsection
 
 @section('contenido')
@@ -107,10 +107,6 @@ Libro
             </div>
         </div>
     </div>
-
 </div>
-
-
-
 
 @endsection 

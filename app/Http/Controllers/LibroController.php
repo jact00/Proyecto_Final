@@ -6,7 +6,6 @@ use App\Models\Libro;
 use App\Models\Ejemplar;
 use Illuminate\Http\Request;
 use App\Models\Categoria;
-use App\Models\Devolucion;
 use Illuminate\Database\Eloquent\Builder;
 
 class LibroController extends Controller
@@ -183,7 +182,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('delete', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',

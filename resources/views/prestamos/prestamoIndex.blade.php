@@ -26,7 +26,7 @@ Prestamos
 <div class="row">
 <div class="card mx-auto bg-secondary col col-12 col-md-8">
 <div class="card-body">
-<table class="table w-auto d-block d-md-table rounded table-responsive table-sm text-center table-striped mb-0 rounded">
+<table class="table rounded w-auto d-block d-md-table table-responsive table-sm text-center table-striped mb-0">
     <thead>
         <tr class="table-primary text-center align-middle">
             <th scope="col" class=" align-middle">ID</th>

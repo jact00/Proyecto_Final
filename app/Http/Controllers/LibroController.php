@@ -37,7 +37,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('create', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',
@@ -57,7 +57,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('create', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',
@@ -99,7 +99,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('view', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'La página a la que intentaste acceder no existe',
                 'titulo-alerta' => 'Oops...',
                 'tipo-alerta' => 'alert-info',
@@ -119,7 +119,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('update', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',
@@ -140,7 +140,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('update', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',
@@ -188,6 +188,12 @@ class LibroController extends Controller
                 'tipo-alerta' => 'alert-danger',
             ]);
         }
+        if($libro->ejemplares()->where('en_prestamo', true)->count() > 0)
+            return redirect()->back()->with([
+                'mensaje-alerta' => 'Hay ejemplares de este libro en prestamo, no se puede eliminar.',
+                'titulo-alerta' => 'Error!',
+                'tipo-alerta' => 'alert-danger',
+            ]);
 
         $libro->delete();
         return redirect()->route('libro.index')->with([
@@ -201,7 +207,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('update', Libro::class))
         {
-            return redirect()->route('libro.index')->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',
@@ -226,7 +232,7 @@ class LibroController extends Controller
     {
         if(!\Auth::user()->can('update', Libro::class))
         {
-            return redirect()->route('libro.show', compact('libro'))->with([
+            return redirect()->back()->with([
                 'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
                 'titulo-alerta' => 'Acceso denegado!',
                 'tipo-alerta' => 'alert-danger',

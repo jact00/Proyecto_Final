@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movimiento;
 use App\Models\Ejemplar;
 use Illuminate\Http\Request;
+use App\Models\Alumno;
 
 class MovimientoController extends Controller
 {
@@ -35,7 +36,17 @@ class MovimientoController extends Controller
      */
     public function create()
     {
-        //
+        if(!\Auth::user()->can('create', Libro::class))
+        {
+            return redirect()->back()->with([
+                'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
+                'titulo-alerta' => 'Acceso denegado!',
+                'tipo-alerta' => 'alert-danger',
+            ]);
+        }
+        $ejemplares = Ejemplar::where('en_prestamo', false)->get();
+        $alumnos = Alumno::all();
+        return view('prestamos/prestamoForm', compact('ejemplares', 'alumnos'));
     }
 
     /**
@@ -46,7 +57,67 @@ class MovimientoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        if(!\Auth::user()->can('create', Movimiento::class))
+        {
+            return redirect()->back()->with([
+                'mensaje-alerta' => 'No cuenta con los permisos necesarios.',
+                'titulo-alerta' => 'Acceso denegado!',
+                'tipo-alerta' => 'alert-danger',
+            ]);
+        }
+
+        $idx = 0;
+        $ejemplares = [ $idx++ => $request->ejemplar_1];
+
+        if($request->has('usar_2'))
+        {
+            if($request->ejemplar_1 == $request->ejemplar_2)
+                return redirect()->back()->with([
+                    'mensaje-alerta' => 'Hay 2 o más ejemplares iguales.',
+                    'titulo-alerta' => 'Error!',
+                    'tipo-alerta' => 'alert-danger',
+                ]);
+            else
+                $ejemplares[$idx++] = $request->ejemplar_2;
+
+            if($request->has('usar_3'))
+                if($request->ejemplar_3 == $request->ejemplar_2 || $request->ejemplar_3 == $request->ejemplar_1)
+                    return redirect()->back()->with([
+                        'mensaje-alerta' => 'Hay 2 o más ejemplares iguales.',
+                        'titulo-alerta' => 'Error!',
+                        'tipo-alerta' => 'alert-danger',
+                    ]);
+            else
+                $ejemplares[$idx++] = $request->ejemplar_3;
+        }
+        else if($request->has('usar_3'))
+        {
+            if($request->ejemplar_1 == $request->ejemplar_3)
+                return redirect()->back()->with([
+                    'mensaje-alerta' => 'Hay 2 o más ejemplares iguales.',
+                    'titulo-alerta' => 'Error!',
+                    'tipo-alerta' => 'alert-danger',
+                ]);
+            $ejemplares[$idx++] = $request->ejemplar_3;
+        }
+
+        $movimiento = Movimiento::create([
+            'alumno_id' => $request->alumno_id,
+            'operador_id' => \Auth::user()->id,
+        ]);
+
+        foreach ($ejemplares as $ejemplar) {
+            $movimiento->ejemplares()->attach($ejemplar);
+            $ejemplar_m = Ejemplar::find($ejemplar);
+            $ejemplar_m->en_prestamo = true;
+            $ejemplar_m->save();
+        }
+
+        return redirect()->route('prestamo.index')->with([
+            'mensaje-alerta' => 'Prestamo para ' . $movimiento->alumno->user->nombre_completo . ' agregado exitosamente.',
+            'titulo-alerta' => 'Acción exitosa!',
+            'tipo-alerta' => 'alert-success',
+        ]);
     }
 
     /**

@@ -7,7 +7,7 @@ Libros
 @section('contenido')
 
 <div class="row">
-    <div class="col col-8 mx-auto">
+    <div class="col mt-5 col-8 mx-auto">
         @if(isset($libro))
         <form class="card bg-primary" action="{{ route('libro.update', [$libro]) }}" method="POST">
             <div class="card-header">
